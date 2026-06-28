@@ -24,21 +24,45 @@ export class Terminal {
         this.#commands[name.toLowerCase()] = fn;
     }
 
-    print(text) {
+    print(text, charDelayMs = 40) {
         const line = document.createElement("div");
-        line.textContent = text;
         this.#output.appendChild(line);
-        this.#output.scrollTop = this.#output.scrollHeight;
-    }
 
-    printLines(lines) {
-        lines.forEach(l => this.print(l));
-    }
+        return new Promise(resolve => {
+            let i = 0;
+            const typeNext = () => {
+                line.textContent += text[i];
+                i++;
+                this.#output.scrollTop = this.#output.scrollHeight;
 
-    printLinesDelayed(lines, delayMs = 2000) {
-        lines.forEach((line, i) => {
-            setTimeout(() => this.print(line), i * delayMs);
+                if (i < text.length) {
+                    setTimeout(typeNext, charDelayMs);
+                } else {
+                    resolve();
+                }
+            };
+
+            if (text.length === 0) {
+                resolve();
+            } else {
+                typeNext();
+            }
         });
+    }
+
+    async printLines(lines, charDelayMs = 40) {
+        for (const line of lines) {
+            await this.print(line, charDelayMs);
+        }
+    }
+
+    async printLinesDelayed(lines, delayMs = 2000, charDelayMs = 40) {
+        for (let i = 0; i < lines.length; i++) {
+            await this.print(lines[i], charDelayMs);
+            if (i < lines.length - 1) {
+                await new Promise(resolve => setTimeout(resolve, delayMs));
+            }
+        }
     }
 
     updatePrompt() {
@@ -56,10 +80,10 @@ export class Terminal {
         return allowedRoles.includes(this.currentUser.role);
     }
 
-    #attemptLogin(password) {
+    async #attemptLogin(password) {
         const user = Object.values(this.fs.users).find(u => u.code === password);
         if (!user) {
-            this.print("ACCESS DENIED.");
+            await this.print("ACCESS DENIED.");
             return;
         }
 
@@ -67,31 +91,38 @@ export class Terminal {
         this.#loggedIn = true;
         this.#input.type = "text";
 
-        this.print(`MOTHER: NAUTILUS`);
-        this.print(`Welcome, ${user.name}.`);
-        this.print("How can MOTHER help?");
+        await this.print(`MOTHER: NAUTILUS`);
+        await this.print(`Welcome, ${user.name}.`);
+        await this.print("How can MOTHER help?");
 
         this.updatePrompt();
     }
 
-    #handleInput() {
+    async #handleInput() {
         const raw = this.#input.value.trim();
         this.#input.value = "";
         if (!raw) return;
 
+        this.#input.disabled = true;
+
         if (!this.#loggedIn) {
-            this.#attemptLogin(raw);
+            await this.#attemptLogin(raw);
+            this.#input.disabled = false;
+            this.#input.focus();
             return;
         }
 
-        this.print(`> ${raw}`);
+        await this.print(`> ${raw}`);
 
         const [cmd, ...args] = raw.match(/(?:[^\s"]+|"[^"]*")+/g).map(t => t.replace(/"/g, ""));
         const handler = this.#commands[cmd.toLowerCase()];
         if (handler) {
-            handler(args);
+            await handler(args);
         } else {
-            this.print(`${cmd}: command not found. Type 'help' for available commands.`);
+            await this.print(`${cmd}: command not found. Type 'help' for available commands.`);
         }
+
+        this.#input.disabled = false;
+        this.#input.focus();
     }
 }

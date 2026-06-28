@@ -19,17 +19,17 @@ export function registerCommands(terminal) {
         return entry ? entry.id : null;
     };
 
-    const checkAccess = (path) => {
+    const checkAccess = async (path) => {
         const id = topLevelId(path);
         if (!id) return true; // root or non-restricted path
         if (terminal.hasAccess(id)) return true;
-        printLines(UNAUTHORIZED);
+        await printLines(UNAUTHORIZED);
         return false;
     };
 
-    terminal.register("ls", (args) => {
+    terminal.register("ls", async (args) => {
         const path = fs.resolve(terminal.cwd, args[0] ?? ".");
-        if (!checkAccess(path)) return;
+        if (!(await checkAccess(path))) return;
 
         const node = fs.getNode(path);
 
@@ -38,13 +38,13 @@ export function registerCommands(terminal) {
 
         const entries = fs.list(path);
         if (entries.length === 0) return print("(empty)");
-        printLines(entries.map(e => e.type === "text" ? e.title : `[${e.title}]`));
+        return printLines(entries.map(e => e.type === "text" ? e.title : `[${e.title}]`));
     });
 
-    terminal.register("cd", (args) => {
+    terminal.register("cd", async (args) => {
         const target = args[0] ?? "/";
         const path = fs.resolve(terminal.cwd, target);
-        if (!checkAccess(path)) return;
+        if (!(await checkAccess(path))) return;
 
         if (!fs.exists(path)) return print(`cd: ${target}: No such file or directory`);
         if (!fs.isDirectory(path)) return print(`cd: ${target}: Not a directory`);
@@ -53,26 +53,26 @@ export function registerCommands(terminal) {
         terminal.updatePrompt();
     });
 
-    terminal.register("cat", (args) => {
+    terminal.register("cat", async (args) => {
         if (!args[0]) return print("Usage: cat <file>");
         const path = fs.resolve(terminal.cwd, args[0]);
-        if (!checkAccess(path)) return;
+        if (!(await checkAccess(path))) return;
 
         const node = fs.getNode(path);
 
         if (!node) return print(`cat: ${args[0]}: No such file or directory`);
         if (node.entries) return print(`cat: ${args[0]}: Is a directory`);
 
-        print(`\u2500\u2500 ${node.title} \u2500\u2500`);
-        printLines(node.lines);
+        await print(`\u2500\u2500 ${node.title} \u2500\u2500`);
+        return printLines(node.lines);
     });
 
     terminal.register("pwd", () => {
-        print(fs.pwd(terminal.cwd));
+        return print(fs.pwd(terminal.cwd));
     });
 
     terminal.register("help", () => {
-        printLines([
+        return printLines([
             "Available commands:",
             "  ls [dir]   - list directory contents",
             "  cd <dir>   - change directory",
@@ -115,11 +115,11 @@ export function registerCommands(terminal) {
     };
 
     for (const [code, { allowedRoles, lines }] of Object.entries(protocolCodes)) {
-        terminal.register(code, () => {
+        terminal.register(code, (args) => {
             if (!terminal.hasCodeAccess(allowedRoles)) {
                 return printLines(UNAUTHORIZED);
             }
-            terminal.printLinesDelayed(lines, 2000);
+            return terminal.printLinesDelayed(lines, 2000);
         });
     }
 }

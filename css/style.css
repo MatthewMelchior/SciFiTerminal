@@ -116,6 +116,11 @@ input {
   caret-color: #33ff66;
 }
 
+input:disabled {
+  opacity: 1;
+  color: #33ff66;
+}
+
 /* ── phosphor flicker animation ── */
 @keyframes flicker {
   0%   { opacity: 1; }
