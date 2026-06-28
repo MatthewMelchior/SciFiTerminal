@@ -3,29 +3,39 @@
 
   "users": {
     "CAPTAIN": {
+      "role": "CAPTAIN",
       "code": "mother-51",
       "name": "Captain Smith",
-      "greeting": "Hello, Captain Smith."
+      "greeting": "Hello, Captain Smith.",
+      "access": "all"
     },
     "ANDROID": {
+      "role": "ANDROID",
       "code": "bot-76",
       "name": "Unit A-17",
-      "greeting": "Hello, Unit A-17."
+      "greeting": "Hello, Unit A-17.",
+      "access": "all"
     },
     "DOCTOR": {
+      "role": "DOCTOR",
       "code": "bone-64",
       "name": "Dr. Ellen Cross",
-      "greeting": "Hello, Dr. Ellen Cross."
+      "greeting": "Hello, Dr. Ellen Cross.",
+      "access": ["logs", "crew-records"]
     },
     "MARINE": {
+      "role": "MARINE",
       "code": "iron-09",
       "name": "Sgt. Hayes",
-      "greeting": "Hello, Sgt. Hayes."
+      "greeting": "Hello, Sgt. Hayes.",
+      "access": ["logs", "crew-records"]
     },
     "ENGINEER": {
+      "role": "ENGINEER",
       "code": "bolt-33",
       "name": "Engineer Miller",
-      "greeting": "Hello, Engineer Miller."
+      "greeting": "Hello, Engineer Miller.",
+      "access": ["logs", "crew-records"]
     }
   },
 
