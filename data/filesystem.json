@@ -1,0 +1,256 @@
+{
+  "systemName": "MOTHER",
+
+  "users": {
+    "CAPTAIN": {
+      "code": "mother-51",
+      "name": "Captain Smith",
+      "greeting": "Hello, Captain Smith."
+    },
+    "ANDROID": {
+      "code": "bot-76",
+      "name": "Unit A-17",
+      "greeting": "Hello, Unit A-17."
+    },
+    "DOCTOR": {
+      "code": "bone-64",
+      "name": "Dr. Ellen Cross",
+      "greeting": "Hello, Dr. Ellen Cross."
+    },
+    "MARINE": {
+      "code": "iron-09",
+      "name": "Sgt. Hayes",
+      "greeting": "Hello, Sgt. Hayes."
+    },
+    "ENGINEER": {
+      "code": "bolt-33",
+      "name": "Engineer Miller",
+      "greeting": "Hello, Engineer Miller."
+    }
+  },
+
+  "root": [
+    {
+      "id": "logs",
+      "name": "logs",
+      "title": "TSS-193 Logs",
+      "type": "directory",
+
+      "entries": [
+        {
+          "id": "test",
+          "name": "test",
+          "title": "20/03/3056 - TEST",
+          "type": "text",
+          "lines": [
+            "Hello, world."
+          ]
+        },
+        {
+          "id": "maintenance",
+          "name": "maintenance",
+          "title": "27/03/3056 - SHIP MAINTENANCE COMPLETE",
+          "type": "text",
+          "lines": [
+            "Maintenance cycle completed across all primary systems.",
+            "Engine integrity stable. No anomalies detected.",
+            "Ship classified as fully operational."
+          ]
+        },
+        {
+          "id": "mother-install",
+          "name": "mother-install",
+          "title": "19/06/3058 - MOTHER SUCCESSFULLY INSTALLED",
+          "type": "text",
+          "lines": [
+            "MOTHER system successfully installed and initialized.",
+            "Audio relays confirmed online across all decks.",
+            "Voice response protocols functioning within normal parameters."
+          ]
+        },
+        {
+          "id": "ship-cleared",
+          "name": "ship-cleared",
+          "title": "02/02/3060 - SHIP CLEARED",
+          "type": "text",
+          "lines": [
+            "All system trials completed.",
+            "Emergency, navigation, and life-support tests passed.",
+            "Vessel cleared for departure under standard authority protocol."
+          ]
+        },
+        {
+          "id": "crew-locked",
+          "name": "crew-locked",
+          "title": "31/10/3061 - CREW LOCKED",
+          "type": "text",
+          "lines": [
+            "Crew roster finalized.",
+            "Personnel assigned to designated operational roles.",
+            "Personal access codes will be distributed prior to departure."
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "crew-records",
+      "name": "crew",
+      "title": "CREW RECORDS",
+      "type": "directory",
+
+      "entries": [
+        {
+          "id": "john-smith",
+          "name": "john-smith",
+          "title": "JOHN SMITH",
+          "type": "text",
+          "lines": [
+            "AGE: 34",
+            "CLASS: CAPTAIN",
+            "SKILLS: A, B, C"
+          ]
+        },
+        {
+          "id": "jane-teamster",
+          "name": "jane-teamster",
+          "title": "JANE DOE - TEAMSTER",
+          "type": "text",
+          "lines": [
+            "AGE: 34",
+            "CLASS: TEAMSTER",
+            "SKILLS: A, B, C"
+          ]
+        },
+        {
+          "id": "jane-android",
+          "name": "jane-android",
+          "title": "JANE DOE - ANDROID",
+          "type": "text",
+          "lines": [
+            "AGE: 34",
+            "CLASS: ANDROID",
+            "SKILLS: A, B, C"
+          ]
+        },
+        {
+          "id": "jane-scientist",
+          "name": "jane-scientist",
+          "title": "JANE DOE - SCIENTIST",
+          "type": "text",
+          "lines": [
+            "AGE: 34",
+            "CLASS: SCIENTIST",
+            "SKILLS: A, B, C"
+          ]
+        },
+        {
+          "id": "jane-marine",
+          "name": "jane-marine",
+          "title": "JANE DOE - MARINE",
+          "type": "text",
+          "lines": [
+            "AGE: 34",
+            "CLASS: MARINE",
+            "SKILLS: A, B, C"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "protocols",
+      "name": "protocols",
+      "title": "PROTOCOLS",
+      "type": "directory",
+
+      "entries": [
+        {
+          "id": "emergency",
+          "name": "emergency",
+          "title": "EMERGENCY PROTOCOL",
+          "type": "text",
+          "lines": [
+            "###",
+            "###",
+            "###",
+            "",
+            "###",
+            "###",
+            "",
+            "###",
+            "###",
+            "",
+            "###",
+            "",
+            "###",
+            "###",
+            "###",
+            "###",
+            "",
+            "Command Code: 4902",
+            "",
+            "###'###'"
+          ]
+        },
+        {
+          "id": "deceased",
+          "name": "deceased",
+          "title": "DECEASED CREWMEMBER PROTOCOL",
+          "type": "text",
+          "lines": [
+            "###",
+            "###",
+            "###",
+            "###",
+            "###",
+            "###",
+            "###",
+            "",
+            "Command Code: 7845"
+          ]
+        },
+        {
+          "id": "containment",
+          "name": "containment",
+          "title": "CONTAINMENT PROTOCOL",
+          "type": "text",
+          "lines": [
+            "###",
+            "###",
+            "###",
+            "###",
+            "###",
+            "###",
+            "###",
+            "",
+            "Command Code: 3418"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "mother-reboot",
+      "name": "mother-reboot",
+      "title": "MOTHER REBOOT",
+      "type": "directory",
+      "hidden": true,
+
+      "entries": [
+        {
+          "id": "reboot-sequence",
+          "name": "reboot-sequence",
+          "title": "MOTHER REBOOT SEQUENCE",
+          "type": "text",
+          "lines": [
+            "ACCESS RESTRICTED",
+            "No authorized users detected.",
+            "Manual override required.",
+            "System integrity unstable."
+          ]
+        }
+      ]
+    }
+  ]
+}
