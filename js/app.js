@@ -9,3 +9,5 @@ const fs = new VirtualFilesystem(data);
 const terminal = new Terminal(fs);
 
 registerCommands(terminal);
+
+terminal.start();

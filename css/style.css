@@ -134,3 +134,71 @@ input:disabled {
 #screen {
   animation: flicker 6s infinite;
 }
+
+/* ── boot screen ── */
+#boot-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+#boot-screen.active {
+  display: flex;
+}
+
+#boot-logo {
+  font-size: 64px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: #33ff66;
+  text-shadow:
+    0 0 8px rgba(51, 255, 102, 0.9),
+    0 0 20px rgba(51, 255, 102, 0.5);
+  -webkit-text-stroke: 1px #33ff66;
+  margin-bottom: 12px;
+}
+
+#boot-logo.small {
+  font-size: 44px;
+}
+
+#boot-sub {
+  align-self: flex-end;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #33ff66;
+  text-shadow: 0 0 6px rgba(51, 255, 102, 0.7);
+  margin-bottom: 60px;
+}
+
+#boot-bar-wrap {
+  align-self: flex-start;
+  width: 220px;
+  height: 16px;
+  background: rgba(51, 255, 102, 0.08);
+  border: 1px solid rgba(51, 255, 102, 0.3);
+  overflow: hidden;
+}
+
+#boot-bar {
+  height: 100%;
+  width: 0%;
+  background: #4dffb8;
+  box-shadow: 0 0 10px rgba(77, 255, 184, 0.8);
+  transition: width 0.2s linear;
+}
+
+#boot-copyright {
+  align-self: flex-start;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #33ff66;
+  text-shadow: 0 0 6px rgba(51, 255, 102, 0.7);
+  margin-top: 10px;
+}
