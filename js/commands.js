@@ -31,49 +31,74 @@ export function registerCommands(terminal) {
         return false;
     };
 
-    terminal.register("ls", async (args) => {
-        const target = joinArgs(args);
-        const path = fs.resolve(terminal.cwd, target || ".");
-        if (!(await checkAccess(path))) return;
-
+    const listDirectory = async (path) => {
         const node = fs.getNode(path);
-
-        if (!node) return print(`ls: ${target}: No such file or directory`);
-        if (!node.entries) return print(`ls: ${target}: Not a directory`);
+        if (node.hint) await print(node.hint);
 
         const entries = fs.list(path);
         if (entries.length === 0) return print("(empty)");
         return printLines(entries.map(e => e.type === "text" ? e.title : `[${e.title}]`));
-    });
-
-    const cdHandler = async (args) => {
-        const target = joinArgs(args) || "/";
-        const path = fs.resolve(terminal.cwd, target);
-        if (!(await checkAccess(path))) return;
-
-        if (!fs.exists(path)) return print(`${target}: No such file or directory`);
-        if (!fs.isDirectory(path)) return print(`${target}: Not a directory`);
-
-        terminal.cwd = path;
-        terminal.updatePrompt();
     };
 
-    terminal.register("cd", cdHandler);
-    terminal.register("open", cdHandler);
+    const readFile = async (node) => {
+        await print(`\u2500\u2500 ${node.title} \u2500\u2500`);
+        return printLines(node.lines);
+    };
+
+    terminal.register("ls", async (args) => {
+        const target = joinArgs(args);
+        const found = fs.getChild(terminal.cwd, target);
+
+        if (!found) return print(`ls: ${target}: No such file or directory`);
+        if (!(await checkAccess(found.path))) return;
+        if (!found.node.entries) return print(`ls: ${target}: Not a directory`);
+
+        return listDirectory(found.path);
+    });
+
+    terminal.register("cd", async (args) => {
+        const target = joinArgs(args) || "/";
+        const found = fs.getChild(terminal.cwd, target);
+
+        if (!found) return print(`${target}: No such file or directory`);
+        if (!(await checkAccess(found.path))) return;
+        if (!found.node.entries) return print(`${target}: Not a directory`);
+
+        terminal.cwd = found.path;
+        terminal.updatePrompt();
+
+        return listDirectory(found.path);
+    });
+
+    // "open" is the friendlier, do-what-I-mean version of cd/cat: it enters
+    // directories (showing their hint + contents) and reads files, both
+    // without requiring quotes around multi-word names.
+    terminal.register("open", async (args) => {
+        const target = joinArgs(args) || "/";
+        const found = fs.getChild(terminal.cwd, target);
+
+        if (!found) return print(`open: ${target}: No such file or directory`);
+        if (!(await checkAccess(found.path))) return;
+
+        if (found.node.entries) {
+            terminal.cwd = found.path;
+            terminal.updatePrompt();
+            return listDirectory(found.path);
+        }
+
+        return readFile(found.node);
+    });
 
     terminal.register("cat", async (args) => {
         const target = joinArgs(args);
         if (!target) return print("Usage: cat <file>");
-        const path = fs.resolve(terminal.cwd, target);
-        if (!(await checkAccess(path))) return;
+        const found = fs.getChild(terminal.cwd, target);
 
-        const node = fs.getNode(path);
+        if (!found) return print(`cat: ${target}: No such file or directory`);
+        if (!(await checkAccess(found.path))) return;
+        if (found.node.entries) return print(`cat: ${target}: Is a directory`);
 
-        if (!node) return print(`cat: ${target}: No such file or directory`);
-        if (node.entries) return print(`cat: ${target}: Is a directory`);
-
-        await print(`\u2500\u2500 ${node.title} \u2500\u2500`);
-        return printLines(node.lines);
+        return readFile(found.node);
     });
 
     terminal.register("pwd", () => {
@@ -85,7 +110,7 @@ export function registerCommands(terminal) {
             "Available commands:",
             "  ls [dir]    - list directory contents",
             "  cd <dir>    - change directory",
-            "  open <dir>  - same as cd",
+            "  open <name> - enter a directory or read a file",
             "  cat <file>  - display file contents",
             "  pwd         - print working directory",
             "  help        - show this help",
