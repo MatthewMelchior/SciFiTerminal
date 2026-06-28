@@ -52,4 +52,33 @@ export function registerCommands(terminal) {
             "  help       - show this help",
         ]);
     });
+
+    const protocolCodes = {
+        "4902": [
+            "EMERGENCY PROTOCOL ACTIVATED...",
+            "UPLOADING FILES TO ARK...",
+            "SEALING ARK ENTRY...",
+            "DETACHING ARK FROM NAUTILUS...",
+            "DETACHMENT COMPLETE.",
+            "EMERGENCY PROTOCOL EXECUTED SUCCESSFULLY.",
+        ],
+        "7845": [
+            "DECEASED CREWMEMBER PROTOCOL ACTIVATED...",
+            "BODY IDENTIFIED...",
+            "CARGO BAY AIRLOCK READY FOR DEPRESSURIZATION...",
+            "AWAITING RESPONSE FROM MOTHER...",
+        ],
+        "3418": [
+            "CONTAINMENT PROTOCOL ACTIVATED...",
+            "TSS-193 IN LOCKDOWN MODE...",
+            "PLEASE MAKE YOUR WAY TO THE MAIN GALLEY...",
+            "QUARANTINE CONDITIONS ACTIVATING IN T-3 MINUTES...",
+        ],
+    };
+
+    for (const [code, lines] of Object.entries(protocolCodes)) {
+        terminal.register(code, () => {
+            terminal.printLinesDelayed(lines, 2000);
+        });
+    }
 }

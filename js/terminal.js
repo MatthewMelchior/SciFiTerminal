@@ -32,6 +32,12 @@ export class Terminal {
         lines.forEach(l => this.print(l));
     }
 
+    printLinesDelayed(lines, delayMs = 2000) {
+        lines.forEach((line, i) => {
+            setTimeout(() => this.print(line), i * delayMs);
+        });
+    }
+
     updatePrompt() {
         this.#prompt.textContent = `MOTHER:${this.fs.pwd(this.cwd)} > `;
     }
