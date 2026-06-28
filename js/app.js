@@ -9,6 +9,3 @@ const fs = new VirtualFilesystem(data);
 const terminal = new Terminal(fs);
 
 registerCommands(terminal);
-
-terminal.print("MOTHER SYSTEM ONLINE");
-terminal.print(`Welcome to ${data.systemName}. Type 'help' for available commands.`);
