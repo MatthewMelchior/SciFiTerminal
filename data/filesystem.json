@@ -183,6 +183,9 @@
           "name": "emergency",
           "title": "EMERGENCY PROTOCOL",
           "type": "text",
+            "EMERGENCY PROTOCOL CAN ONLY BE READ AND AUTHORIZED BY SHIP'S ANDROID.",
+            "TO RUN EMERGENCY PROTOCOL, ACTIVATE FROM ANDROID'S USER.",
+            "IF UNAVAILABLE OR DECEASED, MOTHER WILL EXECUTE EMERGENCY PROTOCOL BY CAPTAIN'S COMMAND."
           "lines": [
             "",
             "RECIPIENT: SYNTHETIC CREWMEMBER DESIGNATION [ANDROID ID]",
@@ -204,7 +207,8 @@
             "",
             "Command Code: 4902",
             "",
-            "If questioned: 'Emergency protocols have been activated. I am unable to provide further details.'"
+            "If questioned: 'Emergency protocols have been activated. I am unable to provide further details.'",
+            ""
           ]
         },
         {

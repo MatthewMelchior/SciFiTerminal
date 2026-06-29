@@ -33,16 +33,21 @@ export function registerCommands(terminal) {
 
     const listDirectory = async (path) => {
         const node = fs.getNode(path);
-        if (node.hint) await print(node.hint);
-
         const entries = fs.list(path);
-        if (entries.length === 0) return print("(empty)");
-        return printLines(entries.map(e => e.type === "text" ? e.title : `[${e.title}]`));
+
+        const lines = [];
+        if (node.hint) lines.push(node.hint);
+        if (entries.length === 0) lines.push("(empty)");
+        else lines.push(...entries.map(e => e.type === "text" ? e.title : `[${e.title}]`));
+
+        return printLines(lines);
     };
 
     const readFile = async (node) => {
-        await print(`\u2500\u2500 ${node.title} \u2500\u2500`);
-        return printLines(node.lines);
+        if (node.allowedRoles && !terminal.hasCodeAccess(node.allowedRoles)) {
+            return printLines(node.unauthorizedMessage ?? UNAUTHORIZED);
+        }
+        return printLines([`\u2500\u2500 ${node.title} \u2500\u2500`, ...node.lines]);
     };
 
     terminal.register("ls", async (args) => {
@@ -120,6 +125,12 @@ export function registerCommands(terminal) {
     const protocolCodes = {
         "4902": {
             allowedRoles: ["ANDROID"],
+            unauthorizedMessage: [
+                "RESTRICTED ACCESS: UNAUTHORIZED CLEARANCE",
+                "EMERGENCY PROTOCOL CAN ONLY BE READ AND AUTHORIZED BY SHIP'S ANDROID.",
+                "TO RUN EMERGENCY PROTOCOL, ACTIVATE FROM ANDROID'S USER.",
+                "IF UNAVAILABLE OR DECEASED, MOTHER WILL EXECUTE EMERGENCY PROTOCOL BY CAPTAIN'S COMMAND.",
+            ],
             lines: [
                 "EMERGENCY PROTOCOL ACTIVATED...",
                 "UPLOADING FILES TO ARK...",
@@ -149,10 +160,10 @@ export function registerCommands(terminal) {
         },
     };
 
-    for (const [code, { allowedRoles, lines }] of Object.entries(protocolCodes)) {
+    for (const [code, { allowedRoles, unauthorizedMessage, lines }] of Object.entries(protocolCodes)) {
         terminal.register(code, (args) => {
             if (!terminal.hasCodeAccess(allowedRoles)) {
-                return printLines(UNAUTHORIZED);
+                return printLines(unauthorizedMessage ?? UNAUTHORIZED);
             }
             return terminal.printLinesDelayed(lines, 2000);
         });
