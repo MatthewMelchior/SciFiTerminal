@@ -183,9 +183,13 @@
           "name": "emergency",
           "title": "EMERGENCY PROTOCOL",
           "type": "text",
+          "allowedRoles": ["ANDROID"],
+          "unauthorizedMessage": [
+            "RESTRICTED ACCESS: UNAUTHORIZED CLEARANCE",
             "EMERGENCY PROTOCOL CAN ONLY BE READ AND AUTHORIZED BY SHIP'S ANDROID.",
             "TO RUN EMERGENCY PROTOCOL, ACTIVATE FROM ANDROID'S USER.",
             "IF UNAVAILABLE OR DECEASED, MOTHER WILL EXECUTE EMERGENCY PROTOCOL BY CAPTAIN'S COMMAND."
+          ],
           "lines": [
             "",
             "RECIPIENT: SYNTHETIC CREWMEMBER DESIGNATION [ANDROID ID]",
@@ -216,6 +220,7 @@
           "name": "deceased",
           "title": "DECEASED CREWMEMBER PROTOCOL",
           "type": "text",
+          "allowedRoles": ["ANDROID", "CAPTAIN"],
           "lines": [
             "",
             "Death confirmed and recorded in ship manifest with status DECEASED.",
@@ -234,6 +239,7 @@
           "name": "containment",
           "title": "CONTAINMENT PROTOCOL",
           "type": "text",
+          "allowedRoles": ["ANDROID", "CAPTAIN"],
           "lines": [
             "",
             "Non-human lifeform detected onboard triggers containment protocol.",
