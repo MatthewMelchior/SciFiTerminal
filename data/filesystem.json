@@ -257,6 +257,33 @@
     },
 
     {
+      "id": "vitals",
+      "name": "vitals",
+      "title": "[TSS-193 VITALS]",
+      "type": "text",
+      "lines": [
+        "",
+        "LIFE SUPPORT: ACTIVE",
+        "ARMOUR PLATING: DAMAGED",
+        "TERMINALS: ACTIVE",
+        "MOTHER: ONLINE",
+        "",
+        "ENGINE ROOM: NORMAL",
+        "CRYOCHAMBERS: NORMAL",
+        "MEDBAY: NORMAL",
+        "ARMOURY: NORMAL",
+        "GALLEY: NORMAL",
+        "LIVING QUARTERS: NORMAL",
+        "CARGO BAY: NORMAL",
+        "SCIENCE LAB: LEAKING OXYGEN",
+        "ANALYSIS LAB: NORMAL",
+        "COMMAND ROOM: NORMAL",
+        "",
+        "Please ask MOTHER for further details."
+      ]
+    },
+
+    {
       "id": "mother-reboot",
       "name": "mother-reboot",
       "title": "MOTHER REBOOT",
