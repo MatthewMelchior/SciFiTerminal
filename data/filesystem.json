@@ -260,7 +260,7 @@
       "id": "vitals",
       "name": "vitals",
       "title": "TSS-193 VITALS",
-      "type": "text",
+      "type": "directory",
       "bracketed": true,
       "lines": [
         "",
