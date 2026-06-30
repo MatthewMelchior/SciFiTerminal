@@ -170,8 +170,24 @@ export class Terminal {
         });
     }
 
+    playHum() {
+        const audio = document.getElementById("hum-sound");
+        if (!audio) return;
+        audio.play().catch(() => {
+            // Autoplay may be blocked until the user interacts with the page.
+            const unlock = () => {
+                audio.play().catch(() => {});
+                document.removeEventListener("keydown", unlock);
+                document.removeEventListener("click", unlock);
+            };
+            document.addEventListener("keydown", unlock, { once: true });
+            document.addEventListener("click", unlock, { once: true });
+        });
+    }
+
     async boot() {
         this.playBootSound();
+        this.playHum();
 
         await this.#showLogoScreen("JCORP", { small: false, withBar: false, duration: 1600 });
         await this.#showLogoScreen("MOTHER", { small: false, withBar: true, duration: 2200 });
@@ -214,7 +230,7 @@ export class Terminal {
 
         this.clear();
         await this.printLines([
-            `MOTHER: NAUTILUS`,
+            `MOTHER: TSS-193 NAUTILUS`,
             `Welcome, ${user.name}.`,
             "How can MOTHER help?",
             "Type 'ls' for listing directory or 'help' for more commands.",

@@ -38,7 +38,7 @@ export function registerCommands(terminal) {
         const lines = [];
         if (node.hint) lines.push(node.hint);
         if (entries.length === 0) lines.push("(empty)");
-        else lines.push(...entries.map(e => (e.entries || e.bracketed) ? `[${e.title}]` : e.title));
+        else lines.push(...entries.map(e => e.type === "text" ? e.title : `[${e.title}]`));
 
         return printLines(lines);
     };
@@ -117,7 +117,6 @@ export function registerCommands(terminal) {
             "  cd <dir>    - change directory",
             "  open <name> - enter a directory or read a file",
             "  cat <file>  - display file contents",
-            "  pwd         - print working directory",
             "  help        - show this help",
         ]);
     });
