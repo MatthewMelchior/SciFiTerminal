@@ -259,8 +259,9 @@
     {
       "id": "vitals",
       "name": "vitals",
-      "title": "[TSS-193 VITALS]",
+      "title": "TSS-193 VITALS",
       "type": "text",
+      "bracketed": true,
       "lines": [
         "",
         "LIFE SUPPORT: ACTIVE",
