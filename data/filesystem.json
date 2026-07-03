@@ -116,7 +116,7 @@
         {
           "id": "jack-captain",
           "name": "jack-captain",
-          "title": "CAPTAIN JACK ANDERSON",
+          "title": "JACK ANDERSON",
           "type": "text",
           "lines": [
             "AGE: 31",
@@ -142,7 +142,7 @@
         {
           "id": "argus-android",
           "name": "argus-android",
-          "title": "ARGUS QN-88-DELTA",
+          "title": "ARGUS",
           "type": "text",
           "lines": [
             "AGE: 2",
@@ -168,7 +168,7 @@
         {
           "id": "diana-marine",
           "name": "diana-marine",
-          "title": "DIANA VARLET - MARINE",
+          "title": "DIANA VARLET",
           "type": "text",
           "lines": [
             "AGE: 32",
