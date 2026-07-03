@@ -5,36 +5,36 @@
     "CAPTAIN": {
       "role": "CAPTAIN",
       "code": "mother-51",
-      "name": "Captain Smith",
-      "greeting": "Hello, Captain Smith.",
+      "name": "Captain Jack Anderson",
+      "greeting": "Hello, Captain Jack Anderson.",
       "access": "all"
     },
     "ANDROID": {
       "role": "ANDROID",
       "code": "bot-76",
-      "name": "Unit A-17",
-      "greeting": "Hello, Unit A-17.",
+      "name": "Unit QN-88-DELTA",
+      "greeting": "Hello, Unit QN-88-DELTA.",
       "access": "all"
     },
     "DOCTOR": {
       "role": "DOCTOR",
       "code": "bone-64",
-      "name": "Dr. Ellen Cross",
-      "greeting": "Hello, Dr. Ellen Cross.",
+      "name": "Dr. Lincoln \"Bone Saw\" Graves",
+      "greeting": "Hello, Dr. Lincoln \"Bone Saw\" Graves.",
       "access": ["logs", "crew-records"]
     },
     "MARINE": {
       "role": "MARINE",
       "code": "iron-09",
-      "name": "Sgt. Hayes",
-      "greeting": "Hello, Sgt. Hayes.",
+      "name": "Sgt. Diana Varrlet",
+      "greeting": "Hello, Sgt. Diana Varrlet.",
       "access": ["logs", "crew-records"]
     },
     "ENGINEER": {
       "role": "ENGINEER",
       "code": "bolt-33",
-      "name": "Engineer Miller",
-      "greeting": "Hello, Engineer Miller.",
+      "name": "Engineer Roderik Vadalia",
+      "greeting": "Hello, Engineer Roderik Vadalia.",
       "access": ["logs", "crew-records"]
     }
   },
@@ -87,7 +87,7 @@
           "lines": [
             "All system trials completed.",
             "Emergency, navigation, and life-support tests passed.",
-            "Vessel cleared for departure under standard authority protocol."
+            "Vessel cleared for departure under standard authority protocol 00-87."
           ]
         },
         {
@@ -98,7 +98,8 @@
           "lines": [
             "Crew roster finalized.",
             "Personnel assigned to designated operational roles.",
-            "Personal access codes will be distributed prior to departure."
+            "Personal access codes will be distributed prior to departure.",
+            "Android Unit QN-88-DELTA installed and assigned to ship's command protocols."
           ]
         }
       ]
@@ -113,58 +114,68 @@
 
       "entries": [
         {
-          "id": "john-smith",
-          "name": "john-smith",
-          "title": "JOHN SMITH",
+          "id": "jack-captain",
+          "name": "jack-captain",
+          "title": "CAPTAIN JACK ANDERSON",
           "type": "text",
           "lines": [
-            "AGE: 34",
+            "AGE: 31",
             "CLASS: CAPTAIN",
-            "SKILLS: A, B, C"
+            "SKILLS: ZERO-G, HEAVY MACHINERY, PILOTING, MILITARY TRAINING, ATHLETICS.",
+            "RELATIONSHIP STATUS: SINGLE",
+            "NEXT OF KIN: N/A"
           ]
         },
         {
-          "id": "jane-teamster",
-          "name": "jane-teamster",
-          "title": "JANE DOE - TEAMSTER",
+          "id": "roderik-teamster",
+          "name": "roderik-teamster",
+          "title": "RODERIK VIDALIA",
           "type": "text",
           "lines": [
             "AGE: 34",
             "CLASS: TEAMSTER",
-            "SKILLS: A, B, C"
+            "SKILLS: ZERO-G, SCAVENGING, MECHANICAL REPAIR, JURY RIGGING",
+            "RELATIONSHIP STATUS: SINGLE",
+            "NEXT OF KIN: BRUCE VIDALIA"
           ]
         },
         {
-          "id": "jane-android",
-          "name": "jane-android",
-          "title": "JANE DOE - ANDROID",
+          "id": "argus-android",
+          "name": "argus-android",
+          "title": "ARGUS QN-88-DELTA",
           "type": "text",
           "lines": [
-            "AGE: 34",
+            "AGE: 2",
             "CLASS: ANDROID",
-            "SKILLS: A, B, C"
+            "SKILLS: COMPUTERS, MATHEMATICS, LINGUISTICS, HACKING",
+            "RELATIONSHIP STATUS: N/A",
+            "NEXT OF KIN: N/A"
           ]
         },
         {
-          "id": "jane-scientist",
-          "name": "jane-scientist",
-          "title": "JANE DOE - SCIENTIST",
+          "id": "lincoln-scientist",
+          "name": "lincoln-scientist",
+          "title": "DR. LINCOLN \"BONE SAW\" GRAVES",
           "type": "text",
           "lines": [
-            "AGE: 34",
+            "AGE: 58",
             "CLASS: SCIENTIST",
-            "SKILLS: A, B, C"
+            "SKILLS: BIOLOGY, FIRST AID, PATHOLOGY, SURGERY",
+            "RELATIONSHIP STATUS: SINGLE",
+            "NEXT OF KIN: EVELYN GRAVES (DECEASED), RHEA GRAVES (DECEASED)"
           ]
         },
         {
-          "id": "jane-marine",
-          "name": "jane-marine",
-          "title": "JANE DOE - MARINE",
+          "id": "diana-marine",
+          "name": "diana-marine",
+          "title": "DIANA VARLET - MARINE",
           "type": "text",
           "lines": [
-            "AGE: 34",
+            "AGE: 32",
             "CLASS: MARINE",
-            "SKILLS: A, B, C"
+            "SKILLS: MILITARY TRAINING, ATHLETICS, FIREARMS",
+            "RELATIONSHIP STATUS: SINGLE",
+            "NEXT OF KIN: N/A"
           ]
         }
       ]
@@ -192,7 +203,7 @@
           ],
           "lines": [
             "",
-            "RECIPIENT: SYNTHETIC CREWMEMBER DESIGNATION [ANDROID ID]",
+            "RECIPIENT: SYNTHETIC CREWMEMBER DESIGNATION [QN-88-DELTA]",
             "CLEARANCE LEVEL: OMEGA-BLACK",
             "HUMAN CREW ACCESS: DENIED",
             "",
