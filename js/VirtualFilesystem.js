@@ -44,6 +44,40 @@ export class VirtualFilesystem {
         return "/" + parts.join("/");
     }
 
+    // Looks up a single entry by its literal name/title relative to
+    // currentPath, without treating "/" inside the name as a path
+    // separator. This matters because titles like "20/03/3056 - TEST"
+    // contain "/" themselves. Still honors ".", "..", and a leading "/"
+    // as navigation shortcuts. Returns { path, node } or null.
+    getChild(currentPath, name) {
+        if (!name || name === ".") {
+            const node = this.getNode(currentPath);
+            return node ? { path: this.normalize(currentPath), node } : null;
+        }
+        if (name === "..") {
+            const parts = this.split(currentPath);
+            parts.pop();
+            const path = "/" + parts.join("/");
+            const node = this.getNode(path);
+            return node ? { path, node } : null;
+        }
+        if (name.startsWith("/")) {
+            const path = this.normalize(name);
+            const node = this.getNode(path);
+            return node ? { path, node } : null;
+        }
+
+        const parent = this.getNode(currentPath);
+        if (!parent || !parent.entries) return null;
+
+        const node = parent.entries.find(e => e.title === name);
+        if (!node) return null;
+
+        const parts = this.split(currentPath);
+        parts.push(name);
+        return { path: "/" + parts.join("/"), node };
+    }
+
     getNode(path = "/") {
         if (path === "/")
             return this.root;

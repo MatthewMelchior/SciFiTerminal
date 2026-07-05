@@ -10,5 +10,9 @@ const terminal = new Terminal(fs);
 
 registerCommands(terminal);
 
-terminal.print("MOTHER SYSTEM ONLINE");
-terminal.print(`Welcome to ${data.systemName}. Type 'help' for available commands.`);
+const bootSound = document.getElementById("boot-sound");
+const typeSound = document.getElementById("type-sound");
+if (bootSound) bootSound.volume = 0.5; // 0.0 (silent) to 1.0 (full volume)
+if (typeSound) typeSound.volume = 0.3; // 0.0 (silent) to 1.0 (full volume)
+
+terminal.start();
