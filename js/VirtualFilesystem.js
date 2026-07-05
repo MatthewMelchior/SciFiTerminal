@@ -44,6 +44,12 @@ export class VirtualFilesystem {
         return "/" + parts.join("/");
     }
 
+    // Strips whitespace, lowercases, and removes non-alphanumeric characters
+    // so user input like "tss193logs" matches "TSS-193 Logs".
+    #normalizeKey(str) {
+        return str.toLowerCase().replace(/[^a-z0-9]/g, "");
+    }
+
     // Looks up a single entry by its literal name/title relative to
     // currentPath, without treating "/" inside the name as a path
     // separator. This matters because titles like "20/03/3056 - TEST"
@@ -70,11 +76,12 @@ export class VirtualFilesystem {
         const parent = this.getNode(currentPath);
         if (!parent || !parent.entries) return null;
 
-        const node = parent.entries.find(e => e.title === name);
+        const key = this.#normalizeKey(name);
+        const node = parent.entries.find(e => this.#normalizeKey(e.title) === key);
         if (!node) return null;
 
         const parts = this.split(currentPath);
-        parts.push(name);
+        parts.push(node.title);
         return { path: "/" + parts.join("/"), node };
     }
 
